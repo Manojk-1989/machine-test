@@ -27,7 +27,7 @@
                   </div>
                   <div class="form-group">
                     <label for="company_contact_number">Contact Number</label>
-                    <input type="text" class="form-control" id="company_contact_number" name="company_contact_number" placeholder="Enter Contact Number" value="{{ isset($company) ? $company->company_contact_number : '' }}">
+                    <input type="number" maxlength="10" class="form-control" id="company_contact_number" name="company_contact_number" placeholder="Enter Contact Number" value="{{ isset($company) ? $company->company_contact_number : '' }}">
                   </div>
                   <div class="form-group">
                     <label for="company_logo">Company Logo</label>
@@ -45,7 +45,7 @@
                   @endif
                   <div class="form-group">
                     <label for="annual_turnover">Annual Turnover</label>
-                    <input type="text" class="form-control" id="annual_turnover" name="annual_turnover" placeholder="Enter Annual Turnover" value="{{ isset($company) ? $company->annual_turnover : '' }}">
+                    <input type="number" class="form-control" id="annual_turnover" name="annual_turnover" placeholder="Enter Annual Turnover" value="{{ isset($company) ? $company->annual_turnover : '' }}">
                   </div>
 
                   <!-- Hidden input field for company_id -->

@@ -35,7 +35,7 @@
                   </div>
                   <div class="form-group">
                     <label for="mobile_number">Mobile Number</label>
-                    <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="{{ isset($employee) ? $employee->mobile_number : '' }}" placeholder="Enter Employee Mobile Number" value="{{ isset($employee) ? $employee->mobile_number : '' }}">
+                    <input type="number" class="form-control" id="mobile_number" name="mobile_number" value="{{ isset($employee) ? $employee->mobile_number : '' }}" placeholder="Enter Employee Mobile Number" value="{{ isset($employee) ? $employee->mobile_number : '' }}">
                   </div>
                   <div class="form-group">
                     <label for="image">Image</label>
@@ -55,7 +55,7 @@
                     <label for="join_date">Join Date</label>
                     <input type="date" class="form-control" id="join_date" name="join_date" value="{{ isset($employee) ? $employee->join_date : '' }}">
                   </div>
-                  <input type="text" id="employee_id" name="employee_id" value="{{ isset($employee) ? $employee->id : '' }}">
+                  <input type="hidden" id="employee_id" name="employee_id" value="{{ isset($employee) ? $employee->id : '' }}">
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>

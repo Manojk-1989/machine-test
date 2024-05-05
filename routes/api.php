@@ -25,6 +25,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     
 });  
+Route::controller(CompanyController::class)->group(function () {
+    Route::get('companies', 'index');
+    
+});  
 Route::middleware('auth:sanctum')->group(function () {
     
     Route::controller(CompanyController::class)->group(function () {

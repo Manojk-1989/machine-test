@@ -16,7 +16,10 @@ class EmployeeController extends Controller
         try {
             $company = Company::findOrFail($companyId);
             $employees = $company->employs;
-            return response()->json($employees);
+            return response()->json([
+                'status' => true,
+                'data' => $employees,
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json('something went wrong');
         }

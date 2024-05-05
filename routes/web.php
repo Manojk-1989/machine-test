@@ -40,6 +40,7 @@ Route::get('/admin/employ/{id}/edit', [EmployeeController::class, 'edit'])->name
 Route::delete('/admin/employ/{id}', [EmployeeController::class, 'destroy'])->name('employ.destroy');
 Route::put('/admin/employ/{id}', [CompanyController::class, 'update'])->name('employ.update');
 
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 });

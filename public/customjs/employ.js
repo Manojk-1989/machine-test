@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+    $('#mobile_number').on('input', function() {
+        var maxLength = 10;
+        if ($(this).val().length > maxLength) {
+            $(this).val($(this).val().slice(0, maxLength));
+        }
+    });
+
     $('.delete-employ').on('click', function() {
         var deleteUrl = $(this).data('url');
         Swal.fire({
