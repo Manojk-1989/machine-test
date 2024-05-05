@@ -1,7 +1,3 @@
-Sure, here's a simple documentation for the provided PHP code:
-
----
-
 ## API Routes Documentation
 
 ### Authentication
@@ -11,7 +7,8 @@ Sure, here's a simple documentation for the provided PHP code:
 - **Description:** Endpoint for user authentication.
 - **Method:** POST
 - **Parameters:**
-  - None
+  - email: admin@admin.com
+    password: password
 - **Response:**
   - Success: 200 OK
   - Failure: 401 Unauthorized
@@ -41,7 +38,3 @@ Sure, here's a simple documentation for the provided PHP code:
 - **Response:**
   - Success: 200 OK
   - Failure: 401 Unauthorized
-
----
-
-This documentation provides a brief overview of the endpoints available in the API along with their descriptions, methods, parameters, authentication requirements, and possible responses.
