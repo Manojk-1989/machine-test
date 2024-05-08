@@ -38,7 +38,7 @@ Route::get('/admin/employ-lists', [EmployeeController::class, 'index'])->name('e
 Route::post('/admin/employ', [EmployeeController::class, 'store'])->name('employ.store');
 Route::get('/admin/employ/{id}/edit', [EmployeeController::class, 'edit'])->name('employ.edit');
 Route::delete('/admin/employ/{id}', [EmployeeController::class, 'destroy'])->name('employ.destroy');
-Route::put('/admin/employ/{id}', [CompanyController::class, 'update'])->name('employ.update');
+Route::put('/admin/employ/{id}', [EmployeeController::class, 'update'])->name('employ.update');
 
 Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 

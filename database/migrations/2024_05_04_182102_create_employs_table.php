@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('mobile_number')->nullable();
             $table->string('image')->nullable();
             $table->date('join_date')->nullable();
-            $table->foreignId('created_by')->constrained('admins');
-            $table->foreignId('updated_by')->constrained('admins');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('admins');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('updated_by')->references('id')->on('admins');
             $table->timestamps();
         });
     }

@@ -62,12 +62,23 @@
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 <!-- Your custom script -->
 <!-- <script src="{{ asset('customjs/company.js') }}"></script> -->
 <!-- <script src="{{ asset('customjs/employ.js') }}"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- <script src="{{ asset('customjs/company-list.js') }}"></script> -->
+
+@if($page === 'company-list')
+  <script src="{{ asset('customjs/company-list.js') }}"></script>
+@else
+<script src="{{ asset('customjs/employ-list.js') }}"></script>
+@endif
+
+
 @stack('scripts')
+
 
 </body>
 </html>

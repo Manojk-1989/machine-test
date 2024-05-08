@@ -55,7 +55,7 @@
                     <label for="join_date">Join Date</label>
                     <input type="date" class="form-control" id="join_date" name="join_date" value="{{ isset($employee) ? $employee->join_date : '' }}">
                   </div>
-                  <input type="hidden" id="employee_id" name="employee_id" value="{{ isset($employee) ? $employee->id : '' }}">
+                  <input type="" id="employee_id" name="employee_id" value="{{ isset($employee) ? $employee->id : '' }}">
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>

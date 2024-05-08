@@ -8,6 +8,8 @@ use App\Models\Company;
 use App\Models\Employ;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\Datatables;
+
 
 
 use App\Http\Requests\EmployeeRequest;
@@ -17,8 +19,15 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            // $data = Company::get(); // Use the Company model to query datadd()
+            // dd($data);
+            $data = Employ::select('*');
+            return DataTables::of($data)
+            ->make(true);
+        }
         $employees = Employ::with('company')->paginate(1);
         $page = 'employ';
         return view('employ-list', compact('employees','page'));
@@ -85,28 +94,26 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $company = Employee::findOrFail($id);
+            $employ = Employ::findOrFail($id);
 
             if ($request->hasFile('image')) {
-                Storage::disk('public')->delete($company->image);
+                Storage::disk('public')->delete($employ->image);
                 $logoPath = $request->file('image')->store('profiles', 'public');
-                $company->image = $logoPath;
+                $employ->image = $logoPath;
             }
 
-            $employee = new Employee();
-            $employee->name = $request->name;
-            $employee->email = $request->email;
-            $employee->image = $logoPath;
-            $employee->company_id = $request->company_id;
-            $employee->mobile_number = $request->mobile_number;
-            $employee->join_date = $request->join_date;
-            $employee->updated_by = Auth::id();
-            $company->updated_at = now();
-            $company->save();
+            $employ->name = $request->name;
+            $employ->email = $request->email;
+            $employ->company_id = $request->company_id;
+            $employ->mobile_number = $request->mobile_number;
+            $employ->join_date = $request->join_date;
+            $employ->updated_by = Auth::id();
+            $employ->updated_at = now();
+            $employ->save();
 
             return response()->json(['message' => 'Employe details updated successfully'], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Something went wrong'], 200);
+        } catch (\Throwable $th) {dd($th);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
 

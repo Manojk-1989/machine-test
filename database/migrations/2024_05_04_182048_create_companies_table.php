@@ -20,10 +20,10 @@ return new class extends Migration
             $table->decimal('annual_turnover', 10, 2)->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('admins'); // Assuming 'users' table for creators
-            $table->dateTime('created_at');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('admins'); // Assuming 'users' table for updaters
-            $table->dateTime('updated_at');
+            $table->timestamps();
+
         });
     }
 

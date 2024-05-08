@@ -56,6 +56,8 @@ $(document).ready(function() {
         if (employeeId) {
             url = BASE_URL + '/admin/employ/' + employeeId;
             formData.append('_method', 'PUT');
+
+            alert(url);
         }
 
         $.ajax({

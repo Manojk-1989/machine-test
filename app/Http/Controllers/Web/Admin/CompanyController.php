@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CompanyRequest;
+use Yajra\DataTables\Facades\Datatables;
 use App\Models\Company;
 use Auth;
 use App\Traits\TimezoneTrait;
@@ -16,10 +17,17 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            // $data = Company::get(); // Use the Company model to query datadd()
+            // dd($data);
+            $data = Company::select('*');
+            return DataTables::of($data)
+            ->make(true);
+        }
         $companies = Company::paginate(1);
-        $page = 'company';
+        $page = 'company-list';
         return view('company-list', compact('companies','page'));   
     }
 
