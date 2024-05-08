@@ -22,10 +22,16 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // $data = Company::get(); // Use the Company model to query datadd()
-            // dd($data);
-            $data = Employ::select('*');
+            $data = Employ::with('company')->get();
             return DataTables::of($data)
+            ->addColumn('image', function ($employee) {
+                $imageUrl = asset('storage/' . $employee->image);
+                return $imageUrl;
+            })
+            ->addColumn('joining_date', function ($employee) {
+                // Format the joining date as needed
+                return date('F d, Y', strtotime($employee->join_date));
+            })
             ->make(true);
         }
         $employees = Employ::with('company')->paginate(1);

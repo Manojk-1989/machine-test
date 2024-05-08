@@ -20,10 +20,13 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // $data = Company::get(); // Use the Company model to query datadd()
-            // dd($data);
             $data = Company::select('*');
             return DataTables::of($data)
+            ->addColumn('image', function ($company) {
+                $imageUrl = asset('storage/' . $company->company_logo);
+                return $imageUrl;
+            })
+            
             ->make(true);
         }
         $companies = Company::paginate(1);

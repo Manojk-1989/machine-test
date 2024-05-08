@@ -56,23 +56,36 @@ function initialPagelLoad() {
             // Add columns for each attribute you want to display
             { data: 'name'},
             { data: 'email'},
-            { data: 'email'},
+            { data: 'company.company_name'},
             { data: 'mobile_number'},
-
-
             { 
-                data: 'image',
-                render: function(data, type, full, meta) {
-                    return '<img src="' + data + '" alt="Company Logo" style="max-width: 100px; max-height: 100px;">';
+                data: 'image', 
+                name: 'image', 
+                orderable: false, 
+                searchable: false, 
+                render: function(data) {
+                    return '<img src="' + data + '" alt="Employee Image" style="max-width: 100px; max-height: 100px;">';
                 }
-            },
-            { data: 'join_date'},
+            }
+
+
+
+            // { 
+            //     data: 'image',
+            //     render: function(data, type, full, meta) {
+            //         var imageSrc = "{{ asset('storage/profiles/') }}" + data;
+            //         return '<img src="' + imageSrc + '" alt="Employee Image" style="max-width: 100px; max-height: 100px;">';
+            //     }
+            // }
+            ,
+            
+            { data: 'joining_date'},
             { 
                 data: null,
                 render: function(data, type, full, meta) {
                     return '<div class="btn-group" role="group" aria-label="Company Actions">' +
                                '<a href="' + BASE_URL + '/admin/employ/' + full.id + '/edit" class="btn btn-primary btn-sm edit-btn">Edit</a>' +
-                               '<button class="btn btn-danger btn-sm delete-btn delete-company" data-url="' + BASE_URL + '/admin/employ/' + full.id + '" data-id="' + full.id + '">Delete</button>' +
+                               '<button class="btn btn-danger btn-sm delete-btn delete-employ" data-url="' + BASE_URL + '/admin/delete-employ/' + full.id + '" data-id="' + full.id + '">Delete</button>' +
                            '</div>';
                 }
             }

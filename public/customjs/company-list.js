@@ -58,9 +58,12 @@ function initialPagelLoad() {
             { data: 'company_name'},
             { data: 'company_description'},
             { 
-                data: 'company_logo',
-                render: function(data, type, full, meta) {
-                    return '<img src="' + data + '" alt="Company Logo" style="max-width: 100px; max-height: 100px;">';
+                data: 'image', 
+                name: 'image', 
+                orderable: false, 
+                searchable: false, 
+                render: function(data) {
+                    return '<img src="' + data + '" alt="Employee Image" style="max-width: 100px; max-height: 100px;">';
                 }
             },
             { data: 'company_contact_number'},
@@ -70,7 +73,7 @@ function initialPagelLoad() {
                 render: function(data, type, full, meta) {
                     return '<div class="btn-group" role="group" aria-label="Company Actions">' +
                                '<a href="' + BASE_URL + '/admin/company/' + full.id + '/edit" class="btn btn-primary btn-sm edit-btn">Edit</a>' +
-                               '<button class="btn btn-danger btn-sm delete-btn delete-company" data-url="' + BASE_URL + '/admin/company/' + full.id + '" data-id="' + full.id + '">Delete</button>' +
+                               '<button class="btn btn-danger btn-sm delete-btn delete-company" data-url="' + BASE_URL + '/admin/delete-company/' + full.id + '" data-id="' + full.id + '">Delete</button>' +
                            '</div>';
                 }
             }
