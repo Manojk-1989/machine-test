@@ -15,8 +15,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <img  class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Admin</span>
     </a>
 
     <!-- Sidebar -->
@@ -70,9 +70,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- <script src="{{ asset('customjs/company-list.js') }}"></script> -->
 
-@if($page === 'company-list')
+@if($page === 'company')
+<script src="{{ asset('customjs/company.js') }}"></script>
+@elseif($page === 'company-list')
   <script src="{{ asset('customjs/company-list.js') }}"></script>
-@else
+@elseif($page === 'employ')
+<script src="{{ asset('customjs/employ.js') }}"></script>
+@elseif($page === 'employ-list')
 <script src="{{ asset('customjs/employ-list.js') }}"></script>
 @endif
 

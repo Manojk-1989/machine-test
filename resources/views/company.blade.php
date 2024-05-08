@@ -48,7 +48,6 @@
                     <input type="number" class="form-control" id="annual_turnover" name="annual_turnover" placeholder="Enter Annual Turnover" value="{{ isset($company) ? $company->annual_turnover : '' }}">
                   </div>
 
-                  <!-- Hidden input field for company_id -->
                   <input type="hidden" id="company_id" name="company_id" value="{{ isset($company) ? $company->id : '' }}">
                 </div>
                 <div class="card-footer">
@@ -62,10 +61,3 @@
     </section>
 
 @stop
-@push('scripts')
-    @if($page === 'company')
-        <script src="{{ asset('customjs/company.js') }}"></script>
-    @elseif($page === 'employ')
-        <script src="{{ asset('customjs/employee.js') }}"></script>
-    @endif
-@endpush

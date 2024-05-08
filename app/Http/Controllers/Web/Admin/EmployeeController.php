@@ -9,13 +9,14 @@ use App\Models\Employ;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\Datatables;
-
-
-
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\EmployeeRequest;
+use App\Traits\TimezoneTrait;
+
 
 class EmployeeController extends Controller
 {
+    use TimezoneTrait;
     /**
      * Display a listing of the resource.
      */
@@ -29,14 +30,21 @@ class EmployeeController extends Controller
                 return $imageUrl;
             })
             ->addColumn('joining_date', function ($employee) {
-                // Format the joining date as needed
                 return date('F d, Y', strtotime($employee->join_date));
+            })
+            ->addColumn('encriptedId', function ($employee) {
+                return Crypt::encrypt($employee->id);
+            })
+            ->addColumn('created_at', function ($employee) {
+                return $formattedCreatedAt = $employee->created_at->format('Y-m-d h:i A'). " (From Admin Login From $employee->country)";
+            })
+            ->addColumn('updated_at', function ($employee) {
+                return $formattedCreatedAt = $employee->updated_at->format('Y-m-d h:i A'). " (From Admin Login From $employee->country)";
             })
             ->make(true);
         }
-        $employees = Employ::with('company')->paginate(1);
-        $page = 'employ';
-        return view('employ-list', compact('employees','page'));
+        $page = 'employ-list';
+        return view('employ-list', compact('page'));
     }
 
     /**
@@ -67,6 +75,8 @@ class EmployeeController extends Controller
             $employee->join_date = $data['join_date'];
             $employee->created_by = Auth::id();
             $employee->updated_by = Auth::id();
+            $employee->country = $this->getUserCountry($request->ip());
+
             $employee->save();
 
             return response()->json(['message' => 'Company created successfully'], 201);
@@ -89,7 +99,7 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        $employee = Employ::findOrFail($id);
+        $employee = Employ::findOrFail(Crypt::decrypt($id));
         $companies = Company::all();
         return view('employ', ['employee' => $employee, 'companies' => $companies, 'page' => 'employ']);
     }
@@ -118,7 +128,7 @@ class EmployeeController extends Controller
             $employ->save();
 
             return response()->json(['message' => 'Employe details updated successfully'], 200);
-        } catch (\Throwable $th) {dd($th);
+        } catch (\Throwable $th) {
             return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
@@ -139,7 +149,7 @@ class EmployeeController extends Controller
         
             return response()->json(['message' => 'Employee deleted successfully'], 200);
         } catch (\Throwable $th) {dd($th);
-            return response()->json(['message' => 'Something went wrong'], 200);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
         
     }

@@ -9,6 +9,9 @@ use Yajra\DataTables\Facades\Datatables;
 use App\Models\Company;
 use Auth;
 use App\Traits\TimezoneTrait;
+use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
+use Stevebauman\Location\Facades\Location;
 
 
 class CompanyController extends Controller
@@ -26,12 +29,19 @@ class CompanyController extends Controller
                 $imageUrl = asset('storage/' . $company->company_logo);
                 return $imageUrl;
             })
-            
+            ->addColumn('encriptedId', function ($company) {
+                return Crypt::encrypt($company->id);
+            })
+            ->addColumn('created_at', function ($company) {
+                return $formattedCreatedAt = $company->created_at->format('Y-m-d h:i A'). " (From Admin Login From $company->country)";
+            })
+            ->addColumn('updated_at', function ($company) {
+                return $formattedCreatedAt = $company->updated_at->format('Y-m-d h:i A'). " (From Admin Login From $company->country)";
+            })
             ->make(true);
         }
-        $companies = Company::paginate(1);
         $page = 'company-list';
-        return view('company-list', compact('companies','page'));   
+        return view('company-list', compact('page'));   
     }
 
     /**
@@ -52,23 +62,25 @@ class CompanyController extends Controller
             $data = $request->validated();
             $logoPath = $request->file('company_logo')->store('logos', 'public');
 
+
             $company = new Company([
                 'company_name' => $data['company_name'],
                 'company_description' => $data['company_description'],
                 'company_logo' => $logoPath,
                 'company_contact_number' => $data['company_contact_number'],
-                'annual_turnover' => $data['annual_turnover'],
+                'annual_turnover' => round($data['annual_turnover'], 4),
                 'created_by' => Auth::id(),
                 'created_at' => now(),
                 'updated_by' => Auth::id(),
                 'updated_at' => now(),
+                'country' => $this->getUserCountry($request->ip()),
             ]);
-            $company->created_at = now()->setTimezone($this->getTimeZoneFromOffset($request->timezone_offset));
-            $company->updated_at = now()->setTimezone($this->getTimeZoneFromOffset($request->timezone_offset));
+            // $company->created_at = now()->setTimezone($this->getTimeZoneFromOffset($request->timezone_offset));
+            // $company->updated_at = now()->setTimezone($this->getTimeZoneFromOffset($request->timezone_offset));
             $company->save();
 
             return response()->json(['message' => 'Company created successfully'], 201);
-        } catch (\Throwable $th) {
+        } catch (\Throwable $th) { dd($th);
             return response()->json(['message' => 'Something went wrong'], 500);
         }
 
@@ -88,7 +100,7 @@ class CompanyController extends Controller
      */
     public function edit(string $id)
     {
-        $company = Company::findOrFail($id);
+        $company = Company::findOrFail(Crypt::decrypt($id));
         return view('company', ['company' => $company, 'page' => 'company']);
     }
 
@@ -127,6 +139,10 @@ class CompanyController extends Controller
     public function destroy(string $id)
     {
         $company = Company::find($id);
+        if (!$company) {
+            return response()->json(['message' => 'Company not found'], 404);
+        }
+
         if (!$company->employs->isEmpty()) {
             return response()->json(['message' => 'Cannot delete company with associated employees'], 200);
         }

@@ -12,6 +12,7 @@
                         <h3 class="card-title">Company List</h3>
                     </div>
                     <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-bordered" id="company-table">
                         <thead>
                             <tr>
@@ -21,10 +22,14 @@
                                 <th>Company Logo</th>
                                 <th>Contact Number</th>
                                 <th>Turnover</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                     </table>
+                    </div>
+
                     </div>
                 </div>
             </div>

@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('company_description')->nullable();
             $table->string('company_logo')->nullable();
             $table->string('company_contact_number')->nullable();
-            $table->decimal('annual_turnover', 10, 2)->nullable();
+            $table->decimal('annual_turnover', 20, 4)->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('admins'); // Assuming 'users' table for creators
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('admins'); // Assuming 'users' table for updaters
+            $table->string('country')->nullable();
             $table->timestamps();
 
         });

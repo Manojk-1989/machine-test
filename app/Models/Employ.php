@@ -28,7 +28,7 @@ class Employ extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'company_id', 'mobile_number', 'image', 'join_date', 'created_by', 'created_at', 'updated_by', 'updated_at'
+        'name', 'email', 'company_id', 'mobile_number', 'image', 'join_date', 'created_by', 'created_at', 'updated_by', 'updated_at', 'country'
     ];
 
     public function company()

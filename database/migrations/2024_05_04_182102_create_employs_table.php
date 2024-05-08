@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('created_by')->references('id')->on('admins');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('admins');
+            $table->string('country')->nullable();
             $table->timestamps();
         });
     }

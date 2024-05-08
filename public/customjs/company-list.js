@@ -6,7 +6,6 @@ $(document).ready(function() {
 $(document).on('click', '.delete-company', function() {
     var deleteUrl = $(this).data('url');
 
-    alert(deleteUrl);
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -54,7 +53,6 @@ function initialPagelLoad() {
         ajax: BASE_URL +'/admin/company-lists',
         columns: [
             { data: 'id', name: 'id' },
-            // Add columns for each attribute you want to display
             { data: 'company_name'},
             { data: 'company_description'},
             { 
@@ -68,11 +66,14 @@ function initialPagelLoad() {
             },
             { data: 'company_contact_number'},
             { data: 'annual_turnover'},
+            {data: 'created_at'},
+            {data: 'updated_at'},
+
             { 
                 data: null,
                 render: function(data, type, full, meta) {
                     return '<div class="btn-group" role="group" aria-label="Company Actions">' +
-                               '<a href="' + BASE_URL + '/admin/company/' + full.id + '/edit" class="btn btn-primary btn-sm edit-btn">Edit</a>' +
+                               '<a href="' + BASE_URL + '/admin/company/' + full.encriptedId + '/edit" class="btn btn-primary btn-sm edit-btn">Edit</a>' +
                                '<button class="btn btn-danger btn-sm delete-btn delete-company" data-url="' + BASE_URL + '/admin/delete-company/' + full.id + '" data-id="' + full.id + '">Delete</button>' +
                            '</div>';
                 }

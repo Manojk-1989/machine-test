@@ -20,6 +20,7 @@ class Company extends Model
         'annual_turnover', 
         'created_by', 
         'created_at', 
+        'country',
         'updated_by', 
         'updated_at'
     ];
