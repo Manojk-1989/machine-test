@@ -20,7 +20,7 @@ use App\Http\Controllers\Api\Admin\AuthController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::post('/companies', [AuthController::class, 'login']);
+Route::post('/admin/login', [AuthController::class, 'login']);
      
 Route::middleware('auth:sanctum')->group(function () {
     
