@@ -125,6 +125,7 @@ class EmployeeController extends Controller
             $employ->join_date = $request->join_date;
             $employ->updated_by = Auth::id();
             $employ->updated_at = now();
+            $employ->country = $this->getUserCountry($request->ip());
             $employ->save();
 
             return response()->json(['message' => 'Employe details updated successfully'], 200);

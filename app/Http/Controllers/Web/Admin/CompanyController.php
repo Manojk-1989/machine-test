@@ -121,7 +121,8 @@ class CompanyController extends Controller
             $company->company_contact_number = $request->company_contact_number;
             $company->annual_turnover = $request->annual_turnover;
             $company->updated_by = Auth::id();
-            $company->updated_at = now()->setTimezone($this->getTimeZoneFromOffset($request->timezone_offset));
+            $company->updated_at = now();
+            $company->country = $this->getUserCountry($request->ip());
             $company->save();
 
             return response()->json(['message' => 'Company updated successfully'], 200);
