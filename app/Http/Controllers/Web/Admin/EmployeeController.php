@@ -149,7 +149,7 @@ class EmployeeController extends Controller
             $employee->delete();
         
             return response()->json(['message' => 'Employee deleted successfully'], 200);
-        } catch (\Throwable $th) {dd($th);
+        } catch (\Throwable $th) {
             return response()->json(['message' => 'Something went wrong'], 500);
         }
         

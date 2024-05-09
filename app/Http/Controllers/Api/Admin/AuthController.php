@@ -42,7 +42,7 @@ class AuthController extends Controller
                 'message' => 'Credentials invalid',
             ], 401);
         }
-        } catch (\Throwable $th) {dd($th);
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage()
