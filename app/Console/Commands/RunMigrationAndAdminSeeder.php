@@ -30,6 +30,11 @@ class RunMigrationAndAdminSeeder extends Command
             $this->call('migrate', ['--path' => 'database/migrations/2024_05_04_182120_create_admins_table.php']);
             $this->call('migrate', ['--path' => 'database/migrations/2024_05_04_182048_create_companies_table.php']);
             $this->call('migrate', ['--path' => 'database/migrations/2024_05_04_182102_create_employs_table.php']);
+
+            $this->call('migrate', ['--path' => 'database/migrations/2019_12_14_000001_create_personal_access_tokens_table.php']);
+            $this->call('migrate', ['--path' => 'database/migrations/2019_08_19_000000_create_failed_jobs_table.php']);
+            $this->call('migrate', ['--path' => 'database/migrations/2014_10_12_100000_create_password_reset_tokens_table.php']);
+
             $this->info('Seeding admin data...');
             $this->call('db:seed', ['--class' => 'AdminSeeder']);
         } catch (\Throwable $th) {

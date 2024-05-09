@@ -75,12 +75,10 @@ class CompanyController extends Controller
                 'updated_at' => now(),
                 'country' => $this->getUserCountry($request->ip()),
             ]);
-            // $company->created_at = now()->setTimezone($this->getTimeZoneFromOffset($request->timezone_offset));
-            // $company->updated_at = now()->setTimezone($this->getTimeZoneFromOffset($request->timezone_offset));
             $company->save();
 
             return response()->json(['message' => 'Company created successfully'], 201);
-        } catch (\Throwable $th) { dd($th);
+        } catch (\Throwable $th) {
             return response()->json(['message' => 'Something went wrong'], 500);
         }
 

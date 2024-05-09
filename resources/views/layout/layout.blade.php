@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-@include('head')
+@include('layout.head')
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -9,7 +9,7 @@
 
   
   <!-- /.navbar -->
-  @include('navbar')
+  @include('layout.navbar')
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -22,7 +22,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar Menu -->
-        @include('sidebar')
+        @include('layout.sidebar')
       
     <!-- /.sidebar -->
   </aside>
@@ -48,7 +48,7 @@
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
-  @include('footer')
+  @include('layout.footer')
   <!-- Main Footer -->
 
   
@@ -56,20 +56,11 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-<!-- Bootstrap 4 -->
+<script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
-<!-- Your custom script -->
-<!-- <script src="{{ asset('customjs/company.js') }}"></script> -->
-<!-- <script src="{{ asset('customjs/employ.js') }}"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<!-- <script src="{{ asset('customjs/company-list.js') }}"></script> -->
-
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/sweetalert.js') }}"></script>
 @if($page === 'company')
 <script src="{{ asset('customjs/company.js') }}"></script>
 @elseif($page === 'company-list')

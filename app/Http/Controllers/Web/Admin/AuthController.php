@@ -23,7 +23,6 @@ class AuthController extends Controller
     public function login(AuthRequest $request)
     {
         if (Auth::attempt($request->only('email','password'))) {
-            # code...
             return redirect()->intended(route('company.create'))
                             ->with('status','You have Successfully loggedin');
         } else {
