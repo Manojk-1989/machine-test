@@ -38,8 +38,11 @@
                       </div>
                     </div>
                   </div>
+                  <div class="mt-2" id="imagePreview" style="display: none;">
+                    <img src="" alt="Company Logo" id="previewImage" style="max-width: 100px; max-height: 100px;">
+                  </div>
                   @if(isset($company) && $company->company_logo)
-                  <div class="mt-2">
+                  <div class="mt-2" id="imagePreviewAlreadyExist">
                     <img src="{{ asset('storage/logos/' . basename($company->company_logo)) }}" alt="Company Logo" style="max-width: 100px; max-height: 100px;">
                   </div>
                   @endif

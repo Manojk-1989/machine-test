@@ -46,8 +46,11 @@
                       </div>
                     </div>
                   </div>
+                  <div class="mt-2" id="imagePreview" style="display: none;">
+                    <img src="" alt="Company Logo" id="previewImage" style="max-width: 100px; max-height: 100px;">
+                  </div>
                   @if(isset($employee) && $employee->image)
-                  <div class="mt-2">
+                  <div class="mt-2" id="imagePreviewAlreadyExist">
                     <img src="{{ asset('storage/profiles/' . basename($employee->image)) }}" alt="Employee Image" style="max-width: 100px; max-height: 100px;">
                   </div>
                   @endif

@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Company List</h3>
+                        <h3 class="card-title">Employ List</h3>
                     </div>
                     <div class="card-body">
                     <div class="table-responsive">

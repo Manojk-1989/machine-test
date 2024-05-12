@@ -1,5 +1,16 @@
 $(document).ready(function() {
 
+    $('#image').change(function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#previewImage').attr('src', e.target.result);
+            $('#imagePreview').css('display', 'block');
+            $('#imagePreviewAlreadyExist').hide();
+        };
+        reader.readAsDataURL(file);
+    });
+
     $('#mobile_number').on('input', function() {
         var maxLength = 10;
         if ($(this).val().length > maxLength) {
