@@ -56,6 +56,7 @@ return array(
     'App\\Repositories\\ConfigurationJsonRepository' => $vendorDir . '/laravel/pint/app/Repositories/ConfigurationJsonRepository.php',
     'App\\Repositories\\GitPathsRepository' => $vendorDir . '/laravel/pint/app/Repositories/GitPathsRepository.php',
     'App\\Rules\\CompanyExistEmployee' => $baseDir . '/app/Rules/CompanyExistEmployee.php',
+    'App\\Traits\\FileUploadTrait' => $baseDir . '/app/Traits/FileUploadTrait.php',
     'App\\Traits\\TimezoneTrait' => $baseDir . '/app/Traits/TimezoneTrait.php',
     'App\\ValueObjects\\Issue' => $vendorDir . '/laravel/pint/app/ValueObjects/Issue.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

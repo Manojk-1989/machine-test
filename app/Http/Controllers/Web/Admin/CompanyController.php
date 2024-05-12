@@ -9,14 +9,17 @@ use Yajra\DataTables\Facades\Datatables;
 use App\Models\Company;
 use Auth;
 use App\Traits\TimezoneTrait;
+use App\Traits\FileUploadTrait;
+use App\Traits\UserInformationTrait;
 use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
 use Stevebauman\Location\Facades\Location;
+use Illuminate\Support\Facades\Storage;
 
 
 class CompanyController extends Controller
 {
-    use TimezoneTrait;
+    use TimezoneTrait, FileUploadTrait, UserInformationTrait;
     /**
      * Display a listing of the resource.
      */
@@ -60,7 +63,8 @@ class CompanyController extends Controller
     {
         try {
             $data = $request->validated();
-            $logoPath = $request->file('company_logo')->store('logos', 'public');
+            // $logoPath = $request->file('company_logo')->store('logos', 'public');
+            $logoPath = $this->imageUpload($request->file('company_logo'), 'logos');
 
 
             $company = new Company([
@@ -73,7 +77,7 @@ class CompanyController extends Controller
                 'created_at' => now(),
                 'updated_by' => Auth::id(),
                 'updated_at' => now(),
-                'country' => $this->getUserCountry($request->ip()),
+                'country' => $this->getUserLocation($request->ip()),
             ]);
             $company->save();
 
@@ -122,7 +126,7 @@ class CompanyController extends Controller
             $company->annual_turnover = $request->annual_turnover;
             $company->updated_by = Auth::id();
             $company->updated_at = now();
-            $company->country = $this->getUserCountry($request->ip());
+            $company->country = $this->getUserLocation($request->ip());
             $company->save();
 
             return response()->json(['message' => 'Company updated successfully'], 200);

@@ -12,11 +12,14 @@ use Yajra\DataTables\Facades\Datatables;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\EmployeeRequest;
 use App\Traits\TimezoneTrait;
+use App\Traits\FileUploadTrait;
+use App\Traits\UserInformationTrait;
+
 
 
 class EmployeeController extends Controller
 {
-    use TimezoneTrait;
+    use TimezoneTrait, FileUploadTrait, UserInformationTrait;
     /**
      * Display a listing of the resource.
      */
@@ -64,7 +67,8 @@ class EmployeeController extends Controller
     {
         $data = $request->validated();
         try {
-            $logoPath = $request->file('image')->store('profiles', 'public');
+            // $logoPath = $request->file('image')->store('profiles', 'public');
+            $logoPath = $this->imageUpload($request->file('image'), 'profiles');
 
             $employee = new Employ();
             $employee->name = $data['name'];
@@ -75,7 +79,7 @@ class EmployeeController extends Controller
             $employee->join_date = $data['join_date'];
             $employee->created_by = Auth::id();
             $employee->updated_by = Auth::id();
-            $employee->country = $this->getUserCountry($request->ip());
+            $employee->country = $this->getUserLocation($request->ip());
 
             $employee->save();
 
@@ -114,7 +118,7 @@ class EmployeeController extends Controller
 
             if ($request->hasFile('image')) {
                 Storage::disk('public')->delete($employ->image);
-                $logoPath = $request->file('image')->store('profiles', 'public');
+                $logoPath = $this->imageUpload($request->file('image'), 'profiles');
                 $employ->image = $logoPath;
             }
 
@@ -125,7 +129,7 @@ class EmployeeController extends Controller
             $employ->join_date = $request->join_date;
             $employ->updated_by = Auth::id();
             $employ->updated_at = now();
-            $employ->country = $this->getUserCountry($request->ip());
+            $employ->country = $this->getUserLocation($request->ip());
             $employ->save();
 
             return response()->json(['message' => 'Employe details updated successfully'], 200);
