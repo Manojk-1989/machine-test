@@ -24,6 +24,6 @@ Route::post('/admin/login', [AuthController::class, 'login']);
      
 Route::middleware('auth:sanctum')->group(function () {
     
-    Route::get('/companies', [CompanyController::class, 'index']);
-Route::get('company/{id}/employees', [EmployeeController::class, 'index']);
+    Route::get('admin/companies', [CompanyController::class, 'index']);
+    Route::get('admin/company/{id}/employees', [EmployeeController::class, 'index']);
 });

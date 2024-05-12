@@ -26,7 +26,14 @@ class CompanyRequest extends FormRequest
             'company_description' => 'required|string',
             'company_contact_number' => 'required|string',
             'company_logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'annual_turnover' => 'required|numeric',
+            'annual_turnover' => 'required|numeric||between:0,999999999999999',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'annual_turnover.between' => 'The annual turnover must be between :min and :max.',
         ];
     }
 }

@@ -48,7 +48,7 @@
                   @endif
                   <div class="form-group">
                     <label for="annual_turnover">Annual Turnover</label>
-                    <input type="number" class="form-control" id="annual_turnover" name="annual_turnover" placeholder="Enter Annual Turnover" value="{{ isset($company) ? $company->annual_turnover : '' }}">
+                    <input type="text"  class="form-control" id="annual_turnover" name="annual_turnover" placeholder="Enter Annual Turnover" value="{{ isset($company) ? $company->annual_turnover : '' }}">
                   </div>
 
                   <input type="hidden" id="company_id" name="company_id" value="{{ isset($company) ? $company->id : '' }}">

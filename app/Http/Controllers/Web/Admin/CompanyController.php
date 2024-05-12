@@ -82,7 +82,7 @@ class CompanyController extends Controller
             $company->save();
 
             return response()->json(['message' => 'Company created successfully'], 201);
-        } catch (\Throwable $th) {
+        } catch (\Throwable $th) {dd($th);
             return response()->json(['message' => 'Something went wrong'], 500);
         }
 
