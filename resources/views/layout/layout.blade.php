@@ -70,10 +70,5 @@
 @elseif($page === 'employ-list')
 <script src="{{ asset('customjs/employ-list.js') }}"></script>
 @endif
-
-
-@stack('scripts')
-
-
 </body>
 </html>
